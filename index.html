@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latihan Kata Nama Terbitan — Latihan 19</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --indigo:#1E3A4C; --indigo-deep:#132833; --gold:#C89B3C; --gold-soft:#E4C878;
+    --cream:#F5F0E1; --cream-card:#FBF8EF; --coral:#D65F4C; --coral-soft:#F3D9D3;
+    --green:#4F7756; --green-soft:#DCE7D8; --amber-soft:#F2E4C4; --ink:#24313A;
+    --ink-soft:#5B6B72; --line:#D9D0B8;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--cream); color:var(--ink); font-family:'Plus Jakarta Sans', sans-serif; -webkit-font-smoothing:antialiased; }
+  .wrap{max-width:840px;margin:0 auto;padding:40px 20px 100px;}
+
+  header{ position:relative; background:var(--indigo); color:var(--cream); border-radius:20px; padding:36px 32px; margin-bottom:36px; overflow:hidden; }
+  header::before{
+    content:""; position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(115deg, rgba(200,155,60,0.08) 0 2px, transparent 2px 22px),
+      repeating-linear-gradient(25deg, rgba(200,155,60,0.06) 0 2px, transparent 2px 22px);
+    pointer-events:none;
+  }
+  .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold-soft); position:relative; }
+  h1{ font-family:'Fraunces', serif; font-weight:600; font-size:clamp(26px,5vw,36px); margin:8px 0 6px; position:relative; line-height:1.15; }
+  .subline{position:relative; color:#C9D6DC; font-size:14px; margin:0 0 4px;}
+  .subline .tag-peman{ font-family:'IBM Plex Mono', monospace; color:var(--gold-soft); background:rgba(228,200,120,0.14); padding:1px 7px; border-radius:6px; }
+
+  .instructions{ position:relative; margin-top:18px; background:rgba(255,255,255,0.06); border:1px solid rgba(228,200,120,0.3); border-radius:14px; padding:18px 20px 16px; }
+  .instructions-title{margin:0 0 10px; font-family:'Fraunces', serif; font-weight:600; font-size:16px; color:var(--gold-soft);}
+  .instructions ol{margin:0; padding-left:20px; color:#D6E0E5; font-size:13.5px; line-height:1.65;}
+  .instructions ol > li{margin-bottom:8px;}
+  .instructions ol > li:last-child{margin-bottom:0;}
+  .instructions b{color:var(--gold-soft); font-weight:600;}
+  .instructions ul{margin:6px 0 0; padding-left:18px;}
+  .instructions ul li{margin-bottom:4px;}
+
+  .progress-row{position:relative; margin-top:24px; display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
+  .progress-track{flex:1; min-width:120px; height:8px; border-radius:99px; background:rgba(255,255,255,0.14); overflow:hidden;}
+  .progress-fill{height:100%; width:0%; background:linear-gradient(90deg,var(--gold),var(--gold-soft)); border-radius:99px; transition:width .5s cubic-bezier(.4,1.4,.6,1);}
+  .progress-label{font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--gold-soft); white-space:nowrap;}
+  .clear-btn{
+    flex:0 0 auto; font-family:'Plus Jakarta Sans', sans-serif; font-weight:600; font-size:12.5px;
+    color:var(--cream); background:rgba(255,255,255,0.1); border:1px solid rgba(228,200,120,0.4);
+    border-radius:99px; padding:7px 14px; cursor:pointer; white-space:nowrap; transition:background .2s, border-color .2s;
+  }
+  .clear-btn:hover{background:rgba(214,95,76,0.25); border-color:var(--coral);}
+  @media (max-width:480px){ .progress-row{flex-wrap:wrap;} .clear-btn{width:100%; order:3;} }
+
+  .legend{background:var(--cream-card); border:1px solid var(--line); border-radius:16px; padding:20px 22px; margin-bottom:32px;}
+  .legend summary{
+    cursor:pointer; font-family:'Fraunces', serif; font-weight:600; font-size:16px; color:var(--indigo);
+    list-style:none; display:flex; align-items:center; justify-content:space-between; gap:10px;
+  }
+  .legend summary::-webkit-details-marker{display:none;}
+  .legend summary::after{ content:"↓ ดูชนิดหน่วยคำเติม"; font-family:'Plus Jakarta Sans',sans-serif; font-weight:500; font-size:12.5px; color:var(--ink-soft); white-space:nowrap; }
+  .legend[open] summary::after{content:"↑ ซ่อน";}
+  .legend-note{ margin:14px 0 4px; font-size:13px; color:var(--ink-soft); background:rgba(30,58,76,0.04); border-left:3px solid var(--gold); padding:8px 12px; border-radius:6px; }
+  .legend-grid{margin-top:12px; display:grid; grid-template-columns:1fr; gap:10px;}
+  .legend-item{ display:grid; grid-template-columns:110px 1fr; gap:12px; align-items:baseline; font-size:13.5px; padding:8px 10px; border-radius:10px; background:rgba(30,58,76,0.03); }
+  .legend-tag{ font-family:'IBM Plex Mono', monospace; font-weight:600; color:var(--indigo); background:var(--amber-soft); border-radius:6px; padding:2px 6px; text-align:center; font-size:12px; }
+  .legend-item b{color:var(--indigo);}
+  .legend-item span.th{color:var(--ink-soft);}
+
+  .thread{position:relative;}
+  .thread::before{
+    content:""; position:absolute; left:23px; top:8px; bottom:8px; width:2px;
+    background:repeating-linear-gradient(var(--line), var(--line) 6px, transparent 6px, transparent 11px); z-index:0;
+  }
+  .card{position:relative; z-index:1; display:flex; gap:16px; margin-bottom:18px;}
+  .node{
+    flex:0 0 48px; height:48px; border-radius:50%; background:var(--cream-card); border:2px solid var(--line);
+    display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono', monospace;
+    font-weight:600; color:var(--ink-soft); transition:all .3s ease; margin-top:6px;
+  }
+  .card.correct .node{background:var(--gold); border-color:var(--gold); color:var(--indigo-deep);}
+  .card-body{ flex:1; background:var(--cream-card); border:1px solid var(--line); border-radius:16px; padding:20px 22px; transition:border-color .3s ease; }
+  .card.correct .card-body{border-color:var(--gold);}
+
+  .q-row{display:flex; align-items:baseline; gap:10px; margin-bottom:14px;}
+  .q-word .root{font-family:'Fraunces', serif; font-weight:600; font-size:22px; color:var(--indigo);}
+
+  .fields-row{display:grid; grid-template-columns:1fr 1fr 1.6fr; gap:12px; margin-bottom:6px;}
+  .field label{
+    display:block; font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:.03em;
+    text-transform:uppercase; color:var(--ink-soft); margin-bottom:5px;
+  }
+  input[type="text"]{
+    width:100%; padding:11px 12px; border-radius:10px; border:1.5px solid var(--line);
+    font-family:'IBM Plex Mono', monospace; font-size:14.5px; background:#fff; color:var(--ink);
+    outline:none; transition:border-color .2s;
+  }
+  input[type="text"]:focus{border-color:var(--indigo);}
+  input[type="text"].fb-green{border-color:var(--green);background:var(--green-soft);}
+  input[type="text"].fb-yellow{border-color:var(--gold);background:var(--amber-soft);}
+  input[type="text"].fb-red{border-color:var(--coral);background:var(--coral-soft);}
+
+  .action-row{display:flex; gap:10px; margin-top:8px; align-items:center;}
+  button.check{
+    padding:11px 18px; border-radius:10px; border:none; background:var(--indigo); color:var(--cream);
+    font-family:'Plus Jakarta Sans',sans-serif; font-weight:600; font-size:14px; cursor:pointer;
+    transition:background .2s; white-space:nowrap;
+  }
+  button.check:hover{background:var(--indigo-deep);}
+  button.hint{
+    background:none; border:none; color:var(--ink-soft); font-size:12.5px; text-decoration:underline;
+    cursor:pointer; padding:4px 0; font-family:'Plus Jakarta Sans',sans-serif;
+  }
+
+  .feedback{margin-top:12px; border-radius:12px; padding:14px 16px; font-size:14px; line-height:1.55; display:none;}
+  .feedback.show{display:block; animation:pop .25s ease;}
+  @keyframes pop{from{opacity:0; transform:translateY(-4px);} to{opacity:1; transform:translateY(0);}}
+  .feedback.green{background:var(--green-soft); color:#2E4A33;}
+  .feedback.yellow{background:var(--amber-soft); color:#5C4818;}
+  .feedback.red{background:var(--coral-soft); color:#7A2D22;}
+  .feedback .tag{font-weight:700; margin-bottom:4px; display:block;}
+  .feedback .formula{ font-family:'IBM Plex Mono', monospace; font-size:13px; margin-top:8px; padding:8px 10px; background:rgba(255,255,255,0.55); border-radius:8px; display:inline-block; }
+
+  .summary{margin-top:36px; background:var(--indigo); color:var(--cream); border-radius:20px; padding:32px; text-align:center; display:none;}
+  .summary.show{display:block; animation:pop .4s ease;}
+  .summary h2{font-family:'Fraunces', serif; font-size:26px; margin:0 0 8px; color:var(--gold-soft);}
+  .summary p{margin:0; color:#C9D6DC; font-size:14.5px;}
+  .summary .score{font-family:'IBM Plex Mono', monospace; font-size:38px; color:var(--gold); margin:10px 0;}
+  .reset-btn{ margin-top:18px; background:var(--gold); color:var(--indigo-deep); border:none; padding:10px 22px; border-radius:99px; font-weight:700; cursor:pointer; font-family:'Plus Jakarta Sans',sans-serif; }
+
+  @media (max-width:620px){
+    .card{gap:10px;}
+    .node{flex:0 0 36px;height:36px;font-size:12px;margin-top:4px;}
+    .thread::before{left:17px;}
+    .card-body{padding:16px;}
+    .fields-row{grid-template-columns:1fr;}
+    button.check{width:100%;}
+    .legend-item{grid-template-columns:1fr; gap:4px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Latihan 19 · Kata Nama Terbitan · การวิเคราะห์คำ</div>
+    <h1>แยกคำกลับ:<br>Kata Terbitan → คำมูล + หน่วยคำเติม</h1>
+    <p class="subline">รอบนี้ทำ<span class="tag-peman">ย้อนกลับ</span> — จากคำที่เติมหน่วยคำแล้ว ให้แยกกลับเป็นคำมูล ระบุหน่วยคำเติม และเขียนความหมายภาษาไทย</p>
+
+    <div class="instructions">
+      <p class="instructions-title">📋 คำชี้แจง</p>
+      <ol>
+        <li>โจทย์แต่ละข้อเป็น <b>Kata Terbitan</b> (คำที่เติมหน่วยคำแล้ว) ให้แยกออกเป็น 3 ช่อง:
+          <ul>
+            <li><b>Kata Dasar</b> — คำมูล/รากศัพท์เดิม</li>
+            <li><b>Imbuhan</b> — หน่วยคำเติมที่ใช้ (อาจเป็น peN- อย่างเดียว, -an อย่างเดียว, หรือหน่วยคำเติมวงล้อมอย่าง peN-...-an, ke-...-an, per-...-an)</li>
+            <li><b>ความหมายภาษาไทย</b> — คำแปลของคำ Kata Terbitan นั้น</li>
+          </ul>
+        </li>
+        <li>คำในชุดนี้<b>ไม่ได้ใช้หน่วยคำเติมแบบเดียวกันทั้งหมด</b> — บางคำเป็นคำนามผู้กระทำ (peN-), บางคำเป็นคำนามกระบวนการ (peN-...-an), บางคำเป็นคำนามคุณสมบัติ (ke-...-an) และบางคำใช้ per-...-an ซึ่งเป็นคนละกลุ่มกับ peN- ต้องสังเกตให้ดี</li>
+        <li>พิมพ์คำตอบทั้ง 3 ช่องแล้วกด <b>"ตรวจคำตอบ"</b> หรือ Enter — แก้ไขและตรวจใหม่ได้ไม่จำกัดจำนวนครั้ง</li>
+        <li>ผลตรวจนับตามจำนวนช่องที่ถูก: 🟢 ถูกครบ 3 ช่อง · 🟡 ถูกบางช่อง (ระบบจะบอกว่าช่องไหนต้องแก้) · 🔴 ยังไม่ถูกเลย (ระบบเฉลยให้ทั้งหมด)</li>
+        <li>กด <b>"💡 ต้องการคำใบ้?"</b> รายข้อ หรือปุ่ม <b>"↺ ล้างคำตอบ"</b> เพื่อเริ่มทำใหม่ได้ตลอดเวลา</li>
+      </ol>
+    </div>
+
+    <div class="progress-row">
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-label" id="progressLabel">0 / 10 ถูกต้อง</div>
+      <button class="clear-btn" onclick="confirmReset()" title="ล้างคำตอบทั้งหมดและเริ่มทำใหม่">↺ ล้างคำตอบ</button>
+    </div>
+  </header>
+
+  <details class="legend">
+    <summary>ชนิดหน่วยคำเติมที่พบในชุดนี้</summary>
+    <div class="legend-note">คำในชุดนี้มีหน่วยคำเติมหลายกลุ่มปนกัน ไม่ใช่ peN- อย่างเดียว</div>
+    <div class="legend-grid">
+      <div class="legend-item"><span class="legend-tag">peN- (ผู้กระทำ)</span><span>เติมหน้าอย่างเดียว ไม่มี -an — เช่น tulis → pen<u>ulis</u></span></div>
+      <div class="legend-item"><span class="legend-tag">-an (เดี่ยว)</span><span>เติมท้ายอย่างเดียว ไม่มีคำนำหน้า — เช่น makan → makan<u>an</u></span></div>
+      <div class="legend-item"><span class="legend-tag">peN-...-an</span><span>วงล้อมหน้า-หลัง สร้างคำนามกระบวนการ — เช่น didik → pen<u>didik</u>an</span></div>
+      <div class="legend-item"><span class="legend-tag">ke-...-an</span><span>วงล้อมหน้า-หลัง สร้างคำนามคุณสมบัติ/นามธรรม จากคำคุณศัพท์ — เช่น bersih → ke<u>bersih</u>an</span></div>
+      <div class="legend-item"><span class="legend-tag">per-...-an</span><span>วงล้อมหน้า-หลัง คนละกลุ่มกับ peN- ใช้กับคำที่เกี่ยวข้องกับการค้า/สถาบัน — เช่น dagang → per<u>dagang</u>an</span></div>
+      <div class="legend-item"><span class="legend-tag">pe-...-an (ยกเว้น)</span><span>คำยกเว้นทางประวัติศาสตร์ — เช่น kerja → pe<u>kerja</u>an (ไม่ใช่ pengerjaan)</span></div>
+    </div>
+  </details>
+
+  <div class="thread" id="thread"></div>
+
+  <div class="summary" id="summary">
+    <h2 id="summaryTitle">Tahniah! 🎉</h2>
+    <div class="score" id="summaryScore">10 / 10</div>
+    <p id="summaryText">คุณแยกคำมูล ระบุหน่วยคำเติม และแปลความหมายได้ถูกต้องครบทุกข้อแล้ว</p>
+    <button class="reset-btn" onclick="resetAll()">เริ่มใหม่อีกครั้ง</button>
+  </div>
+
+</div>
+
+<script>
+const DATA = [
+  {
+    word:"penulis", dasar:"tulis", imbuhanCode:"pen", imbuhanDisplay:"peN- (pen-)",
+    meaningKeywords:["นักเขียน","ผู้เขียน"], meaningDisplay:"ผู้เขียน / นักเขียน",
+    ruleTH:"penulis เป็นคำนามผู้กระทำ (agent) — มีแค่หน่วยคำเติม peN- (รูป pen- เพราะ tulis ขึ้นต้นด้วย t) ไม่มี -an ท้ายคำ",
+    commonImbuhan:{ "penan":"penulis เป็นคำนามผู้กระทำเท่านั้น (คนที่เขียน) ไม่มี -an ท้ายคำ ต่างจาก pendidikan ที่เป็นคำนามกระบวนการ — imbuhan ที่ถูกต้องคือ peN- (pen-) อย่างเดียว" }
+  },
+  {
+    word:"pembaca", dasar:"baca", imbuhanCode:"pem", imbuhanDisplay:"peN- (pem-)",
+    meaningKeywords:["ผู้อ่าน"], meaningDisplay:"ผู้อ่าน",
+    ruleTH:"pembaca เป็นคำนามผู้กระทำ — มีแค่ peN- (รูป pem- เพราะ baca ขึ้นต้นด้วย b) ไม่มี -an ท้ายคำ",
+  },
+  {
+    word:"penyanyi", dasar:"nyanyi", imbuhanCode:"pe", imbuhanDisplay:"peN- (pe-)",
+    meaningKeywords:["นักร้อง"], meaningDisplay:"นักร้อง",
+    ruleTH:"nyanyi ขึ้นต้นด้วยเสียงนาสิก ny อยู่แล้ว จึงเติมแค่ pe- โดยไม่เพิ่มเสียงนาสิกซ้ำ — \"ny\" ใน penyanyi เป็นส่วนหนึ่งของรากศัพท์ nyanyi ไม่ใช่เสียงที่เติมใหม่",
+    commonImbuhan:{ "peny":"\"ny\" ในคำนี้เป็นส่วนหนึ่งของรากศัพท์ nyanyi อยู่แล้ว ไม่ได้เกิดจากการเติมเสียงนาสิกแบบ peny- (เหมือน sapu→penyapu) — หน่วยคำเติมจริงๆ คือ pe- เฉยๆ" }
+  },
+  {
+    word:"makanan", dasar:"makan", imbuhanCode:"an", imbuhanDisplay:"-an (ปัจจัยเดี่ยว)",
+    meaningKeywords:["อาหาร"], meaningDisplay:"อาหาร",
+    ruleTH:"makanan ไม่มีคำนำหน้าเลย มีแค่ปัจจัย -an เติมท้าย makan ทำให้เปลี่ยนจากคำกริยา (กิน) เป็นคำนามรูปธรรม (สิ่งที่ถูกกิน = อาหาร)",
+    commonImbuhan:{
+      "pean":"makanan ไม่มีคำนำหน้า peN- เลย มีแค่ -an เติมท้ายเท่านั้น — ต่างจาก pemakan (ผู้กิน) ซึ่งเป็นคนละคำ",
+      "pem":"makanan ไม่มีคำนำหน้า peN- เลย มีแค่ปัจจัย -an เติมท้ายอย่างเดียว — pemakan (มี pem- แต่ไม่มี -an) คือคนละคำที่แปลว่า \"ผู้กิน\""
+    }
+  },
+  {
+    word:"pendidikan", dasar:"didik", imbuhanCode:"penan", imbuhanDisplay:"pen-...-an",
+    meaningKeywords:["การศึกษา","การอบรม"], meaningDisplay:"การศึกษา",
+    ruleTH:"pendidikan เป็นคำนามกระบวนการ ใช้หน่วยคำเติมวงล้อม pen-...-an (didik ขึ้นต้นด้วย d จึงใช้ pen-)",
+    commonImbuhan:{ "pen":"pendidikan มี -an ท้ายคำด้วย ไม่ใช่แค่ peN- อย่างเดียว — imbuhan ที่ถูกต้องคือ pen-...-an (คำนามกระบวนการ) ต่างจาก pendidik (คำนามผู้กระทำ) ที่ไม่มี -an" }
+  },
+  {
+    word:"pembangunan", dasar:"bangun", imbuhanCode:"peman", imbuhanDisplay:"pem-...-an",
+    meaningKeywords:["การพัฒนา","การก่อสร้าง"], meaningDisplay:"การพัฒนา / การก่อสร้าง",
+    ruleTH:"pembangunan เป็นคำนามกระบวนการ ใช้หน่วยคำเติมวงล้อม pem-...-an (bangun ขึ้นต้นด้วย b จึงใช้ pem-)",
+    commonImbuhan:{ "pem":"pembangunan มี -an ท้ายคำด้วย — imbuhan ที่ถูกต้องคือ pem-...-an ต่างจาก pembangun (ผู้สร้าง) ที่ไม่มี -an" }
+  },
+  {
+    word:"kebersihan", dasar:"bersih", imbuhanCode:"kean", imbuhanDisplay:"ke-...-an",
+    meaningKeywords:["ความสะอาด"], meaningDisplay:"ความสะอาด",
+    ruleTH:"kebersihan มาจากคำคุณศัพท์ bersih (สะอาด) ใช้หน่วยคำเติมวงล้อม ke-...-an สร้างคำนามคุณสมบัติ/นามธรรม",
+    commonImbuhan:{ "peman":"bersih เป็นคำคุณศัพท์ ไม่ใช้ peN-...-an แบบคำกริยา — หน่วยคำเติมที่ถูกต้องคือ ke-...-an (kebersihan = ความสะอาด)" }
+  },
+  {
+    word:"perdagangan", dasar:"dagang", imbuhanCode:"peran", imbuhanDisplay:"per-...-an",
+    meaningKeywords:["การค้า","การพาณิชย์","การซื้อขาย"], meaningDisplay:"การค้า / การพาณิชย์",
+    ruleTH:"perdagangan ใช้หน่วยคำเติม per-...-an ซึ่งเป็นคนละกลุ่มกับ peN- — มักใช้กับคำที่เกี่ยวข้องกับการค้า อุตสาหกรรม หรือสถาบัน (เช่น pertanian, perusahaan)",
+    commonImbuhan:{ "pengan":"dagang ไม่ได้ใช้กลุ่ม peN-...-an แต่ใช้ per-...-an ซึ่งเป็นหน่วยคำเติมคนละกลุ่ม สำหรับคำที่เกี่ยวกับการค้า/สถาบัน — imbuhan ที่ถูกต้องคือ per-...-an" }
+  },
+  {
+    word:"pekerjaan", dasar:"kerja", imbuhanCode:"pean", imbuhanDisplay:"pe-...-an (ยกเว้น)",
+    meaningKeywords:["งาน","อาชีพ","การทำงาน"], meaningDisplay:"งาน / อาชีพ",
+    ruleTH:"kerja เป็นคำยกเว้นทางประวัติศาสตร์ (เหมือน pekerja) จึงใช้ pe-...-an ไม่ใช่ peng-...-an ตามกฎทั่วไป",
+    commonImbuhan:{ "pengan":"kerja เป็นคำยกเว้น แม้ขึ้นต้นด้วย k แต่ไม่ใช้ peng-...-an ตามกฎทั่วไป — คำที่ใช้จริงคือ pekerjaan (pe-...-an)" }
+  },
+  {
+    word:"pengangkutan", dasar:"angkut", imbuhanCode:"pengan", imbuhanDisplay:"peng-...-an",
+    meaningKeywords:["การขนส่ง"], meaningDisplay:"การขนส่ง",
+    ruleTH:"pengangkutan เป็นคำนามกระบวนการ ใช้หน่วยคำเติมวงล้อม peng-...-an (angkut ขึ้นต้นด้วยสระ a จึงใช้ peng-)",
+    commonImbuhan:{ "peng":"pengangkutan มี -an ท้ายคำด้วย — imbuhan ที่ถูกต้องคือ peng-...-an ต่างจาก pengangkut (ผู้ขนส่ง) ที่ไม่มี -an" }
+  },
+];
+
+let solvedCount = 0;
+
+function stripImbuhan(s){
+  return s.trim().toLowerCase().replace(/[^a-z]/g,'');
+}
+function normalizeWord(s){
+  return s.trim().toLowerCase().replace(/\s+/g,'');
+}
+
+function buildCards(){
+  const thread = document.getElementById('thread');
+  thread.innerHTML = '';
+  DATA.forEach((item, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.id = 'card-'+i;
+    card.innerHTML = `
+      <div class="node">${String(i+1).padStart(2,'0')}</div>
+      <div class="card-body">
+        <div class="q-row"><span class="q-word"><span class="root">${item.word}</span></span></div>
+        <div class="fields-row">
+          <div class="field">
+            <label>Kata Dasar</label>
+            <input type="text" id="dasar-${i}" placeholder="คำมูล..." autocomplete="off"
+                   onkeydown="if(event.key==='Enter'){checkAnswer(${i})}">
+          </div>
+          <div class="field">
+            <label>Imbuhan</label>
+            <input type="text" id="imbuhan-${i}" placeholder="เช่น pen-...-an" autocomplete="off"
+                   onkeydown="if(event.key==='Enter'){checkAnswer(${i})}">
+          </div>
+          <div class="field">
+            <label>ความหมายภาษาไทย</label>
+            <input type="text" id="meaning-${i}" placeholder="แปลเป็นไทย..." autocomplete="off"
+                   onkeydown="if(event.key==='Enter'){checkAnswer(${i})}">
+          </div>
+        </div>
+        <div class="action-row">
+          <button class="check" onclick="checkAnswer(${i})">ตรวจคำตอบ</button>
+          <button class="hint" onclick="toggleHint(${i})" id="hintBtn-${i}">💡 ต้องการคำใบ้?</button>
+        </div>
+        <div class="feedback" id="feedback-${i}"></div>
+      </div>
+    `;
+    thread.appendChild(card);
+  });
+  document.getElementById('progressLabel').textContent = `0 / ${DATA.length} ถูกต้อง`;
+}
+
+function toggleHint(i){
+  const fb = document.getElementById('feedback-'+i);
+  const item = DATA[i];
+  fb.className = 'feedback show yellow';
+  fb.innerHTML = `<span class="tag">💡 คำใบ้</span>${item.ruleTH}`;
+}
+
+function checkAnswer(i){
+  const item = DATA[i];
+  const dasarInput = document.getElementById('dasar-'+i);
+  const imbuhanInput = document.getElementById('imbuhan-'+i);
+  const meaningInput = document.getElementById('meaning-'+i);
+  const fb = document.getElementById('feedback-'+i);
+  const card = document.getElementById('card-'+i);
+
+  const dasarVal = normalizeWord(dasarInput.value);
+  const imbuhanValRaw = imbuhanInput.value;
+  const imbuhanVal = stripImbuhan(imbuhanValRaw);
+  const meaningVal = meaningInput.value.trim();
+
+  [dasarInput, imbuhanInput, meaningInput].forEach(inp => inp.classList.remove('fb-green','fb-yellow','fb-red'));
+  fb.classList.remove('green','yellow','red');
+
+  if (dasarVal === '' && imbuhanVal === '' && meaningVal === '') {
+    fb.className = 'feedback show red';
+    [dasarInput, imbuhanInput, meaningInput].forEach(inp => inp.classList.add('fb-red'));
+    fb.innerHTML = `<span class="tag">🔴 ยังไม่ได้ตอบ</span>ลองพิมพ์คำตอบทั้ง 3 ช่องก่อนกดตรวจนะครับ`;
+    return;
+  }
+
+  const dasarCorrect = dasarVal === item.dasar;
+  const imbuhanCorrect = imbuhanVal === item.imbuhanCode;
+  const meaningCorrect = meaningVal !== '' && item.meaningKeywords.some(k => meaningVal.includes(k));
+
+  dasarInput.classList.add(dasarCorrect ? 'fb-green' : 'fb-red');
+  imbuhanInput.classList.add(imbuhanCorrect ? 'fb-green' : 'fb-red');
+  meaningInput.classList.add(meaningCorrect ? 'fb-green' : 'fb-red');
+
+  const correctCount = [dasarCorrect, imbuhanCorrect, meaningCorrect].filter(Boolean).length;
+  const alreadyCorrect = card.classList.contains('correct');
+
+  if (correctCount === 3) {
+    fb.className = 'feedback show green';
+    fb.innerHTML = `
+      <span class="tag">🟢 Tahniah! 🎉</span>
+      คุณแยก <b>${item.word}</b> = <b>${item.dasar}</b> (คำมูล) + <b>${item.imbuhanDisplay}</b> (imbuhan) ได้ถูกต้อง แปลว่า <b>${item.meaningDisplay}</b>
+      <div class="formula">${item.dasar} + ${item.imbuhanDisplay} → ${item.word} = ${item.meaningDisplay}</div>
+    `;
+    if (!alreadyCorrect) { card.classList.add('correct'); solvedCount++; updateProgress(); }
+    return;
+  }
+
+  if (correctCount > 0) {
+    imbuhanInput.classList.remove('fb-red');
+    if (!imbuhanCorrect) imbuhanInput.classList.add('fb-yellow');
+    dasarInput.classList.remove('fb-red');
+    if (!dasarCorrect) dasarInput.classList.add('fb-yellow');
+    meaningInput.classList.remove('fb-red');
+    if (!meaningCorrect) meaningInput.classList.add('fb-yellow');
+
+    let notes = [];
+    if (!dasarCorrect) notes.push(`ช่อง <b>Kata Dasar</b> ยังไม่ตรง — คำมูลที่ถูกต้องคือ <b>${item.dasar}</b>`);
+    if (!imbuhanCorrect) {
+      const specific = item.commonImbuhan && item.commonImbuhan[imbuhanVal];
+      notes.push(specific ? specific : `ช่อง <b>Imbuhan</b> ยังไม่ตรง — ${item.ruleTH}`);
+    }
+    if (!meaningCorrect) notes.push(`ช่อง <b>ความหมาย</b> ยังไม่ตรง — ลองอีกครั้ง`);
+
+    fb.className = 'feedback show yellow';
+    fb.innerHTML = `
+      <span class="tag">🟡 Hampir betul!</span>
+      ${notes.join('<br>')}
+      <div class="formula">${item.dasar} + ${item.imbuhanDisplay} → ${item.word} = ${item.meaningDisplay}</div>
+    `;
+    return;
+  }
+
+  fb.className = 'feedback show red';
+  fb.innerHTML = `
+    <span class="tag">🔴 Belum tepat!</span>
+    <b>${item.word}</b> = <b>${item.dasar}</b> (kata dasar) + <b>${item.imbuhanDisplay}</b> (imbuhan).<br>
+    ${item.ruleTH} → ความหมาย: <b>${item.meaningDisplay}</b>
+    <div class="formula">${item.dasar} + ${item.imbuhanDisplay} → ${item.word}</div>
+  `;
+}
+
+function updateProgress(){
+  const pct = Math.round((solvedCount / DATA.length) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `${solvedCount} / ${DATA.length} ถูกต้อง`;
+  if (solvedCount === DATA.length) {
+    const summary = document.getElementById('summary');
+    document.getElementById('summaryScore').textContent = `${solvedCount} / ${DATA.length}`;
+    summary.classList.add('show');
+    summary.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+}
+
+function confirmReset(){
+  if (solvedCount === 0) {
+    const anyTyped = DATA.some((_, i) => {
+      const d = document.getElementById('dasar-'+i), im = document.getElementById('imbuhan-'+i), m = document.getElementById('meaning-'+i);
+      return (d && d.value.trim() !== '') || (im && im.value.trim() !== '') || (m && m.value.trim() !== '');
+    });
+    if (!anyTyped) return;
+  }
+  if (window.confirm('ล้างคำตอบทั้งหมดและเริ่มทำใหม่ทั้ง 10 ข้อหรือไม่?')) {
+    resetAll();
+  }
+}
+
+function resetAll(){
+  solvedCount = 0;
+  document.getElementById('summary').classList.remove('show');
+  buildCards();
+  updateProgress();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+buildCards();
+</script>
+</body>
+</html>
